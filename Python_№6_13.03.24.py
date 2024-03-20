@@ -160,7 +160,6 @@ def print_string_difference(str1, str2):
     elif len(str2) > len(str1):
         print(str2 * (len(str2) - len(str1)))
 
-# Пример использования
 string1 = "Example"
 string2 = "Example1"
 print_string_difference(string1, string2)
