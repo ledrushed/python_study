@@ -1,165 +1,153 @@
 # 1) Дан текст. Найти сумму имеющихся в нем цифр.
 
-текст = "Текст с 123 цифрами 456 для примера 789"  # ваш текст
-сумма_цифр = 0
+def sum_digits_in_text(text):
+    total_sum = 0
+    for char in text:
+        if char.isdigit():
+            total_sum += int(char)
+    return total_sum
 
-for символ in текст:
-    if символ.isdigit():
-        сумма_цифр += int(символ)
-
-print("Сумма цифр в тексте равна:", сумма_цифр)
+text = "Дан текст с цифрами 123 и 456."
+total_sum = sum_digits_in_text(text)
+print(f"Сумма цифр в тексте: {total_sum}")
 
 
 # 2) Дана строка. Заменить все символы 'a' и 'b' на 'A' и 'B' соответственно.
 
-def заменить_символы(string):
-    string_измененная = string.replace('a', 'A').replace('b', 'B')
-    return string_измененная
+input_string = "This is an example with letter 'a' and 'b'."
+replaced_string = ''
 
-исходная_строка = input("Введите строку: ")
-измененная_строка = заменить_символы(исходная_строка)
-print(f"Исходная строка: {исходная_строка}")
-print(f"Измененная строка: {измененная_строка}")
+for char in input_string:
+    if char == 'a':
+        replaced_string += 'A'
+    elif char == 'b':
+        replaced_string += 'B'
+    else:
+        replaced_string += char
+
+print(replaced_string)
+
 
 # 3) # Дана строка, состоящая из слов, разделенных пробелами. Определите, сколько в ней слов. Используйте для решения задачи метод count.
 
-строка = input("Введите строку: ")
-количество_слов = строка.count(' ') + 1
-print(f"Количество слов в строке: {количество_слов}")
+input_string = "Это пример строки со словами разделенными пробелами"
+word_count = input_string.count(' ') + 1
+
+print("Количество слов в строке: ", word_count)
 
 # 4) # Дана строка, состоящая ровно из двух слов, разделенных пробелом.
 # Переставьте эти слова местами.
 
-строка = "Первое Второе"
+input_string = "Первое Второе"
+words = input_string.split()
+reversed_string = ' '.join(reversed(words))
 
-слова = строка.split()
-переставленная_строка = слова[1] + " " + слова[0]
-
-print("Переставленные слова:", переставленная_строка)
-
-строка = "Первое Второе"
-
-слова = строка.split()
-переставленная_строка = слова[1] + " " + слова[0]
-
-print("Переставленные слова:", переставленная_строка)
+print("Строка после перестановки слов:", reversed_string)
 
 # 5)  Дана строка, в которой буква h встречается как минимум два раза. Разверните последовательность символов,
 # заключенную между первым и последним появлением буквы h, в противоположном порядке.
 
-строка = "abcdefhghi"  # Пример строки
+input_string = "abcdehfghi"
+first_h = input_string.find('h')
+last_h = input_string.rfind('h')
 
-первое_вхождение = строка.find('h')
-последнее_вхождение = строка.rfind('h')
+prefix = input_string[:first_h+1]
+suffix = input_string[last_h:]
+middle = input_string[first_h+1:last_h][::-1]
 
-между_h = строка[первое_вхождение + 1 : последнее_вхождение]
+result_string = prefix + middle + suffix
 
-развернутая_последовательность = строка[:первое_вхождение + 1] + между_h[::-1] + строка[последнее_вхождение:]
-
-print("Результат разворота между 'h':", развернутая_последовательность)
+print("Результат после разворота:", result_string)
 
 # 6) Определить, является ли строка палиндромом. Палиндром – это число, слово или фраза, одинаково читающиеся в обоих направления.
 
-def is_palindrome(s):
-    s = s.lower().replace(" ", "")
-    return s == s[::-1]
+input_string = "А роза упала на лапу Азора"
+input_string = input_string.lower().replace(" ", "")
 
-строка = "А роза упала на лапу Азора"
-
-if is_palindrome(строка):
-    print("Данная строка является палиндромом.")
+if input_string == input_string[::-1]:
+    print(f"Строка '{input_string}' является палиндромом!")
 else:
-    print("Данная строка не является палиндромом.")
+    print(f"Строка '{input_string}' не является палиндромом.")
+
 
 # 7) Дана строка, состоящая из английских слов, разделенных пробелами и знаками препинания. Определить длину самого короткого слова.
 
-def find_shortest_word_length_no_inf(s):
-    words = s.split()
-    shortest_word_length = None
+input_string = "Hello, world! This is a test string."
+words = input_string.split()
+min_length = len(input_string)  # Предполагаем, что самое короткое слово длиннее всей строки
 
-    for word in words:
-        clean_word = ''.join(filter(str.isalpha, word))
-        word_length = len(clean_word)
+for word in words:
+    cleaned_word = "".join(filter(str.isalnum, word))  # Удаляем знаки препинания
+    if cleaned_word:  # Проверяем, что слово не пустое после удаления знаков препинания
+        if len(cleaned_word) < min_length:  # Если длина очищенного слова меньше текущей минимальной
+            min_length = len(cleaned_word)  # Обновляем минимальную длину
 
-        if clean_word and (shortest_word_length is None or word_length < shortest_word_length):
-            shortest_word_length = word_length
-
-    return shortest_word_length if shortest_word_length is not None else 0
-
-string = "According to Marx, escalating tension between the upper and lower class is a major consequence of technology decreasing the value of labor force and the contradictory effect an evolving means of production has on established social and economic systems"
-print(find_shortest_word_length_no_inf(string))
+print(f"Длина самого короткого слова в строке: {min_length}")
 
 # 8) Дана строка. Определите общее количество символов '+' и '-' в ней.
 
-def count_plus_minus_chars(s):
-    count_plus = 0
-    count_minus = 0
+input_string = "This is a test string with + and - characters."
+count_plus = 0
+count_minus = 0
 
-    for char in s:
-        if char == '+':
-            count_plus += 1
-        elif char == '-':
-            count_minus += 1
+for char in input_string:
+    if char == '+':
+        count_plus += 1
+    elif char == '-':
+        count_minus += 1
 
-    return count_plus, count_minus
+total_count = count_plus + count_minus
 
-string = "++--Hello-+World--+"
-count_plus, count_minus = count_plus_minus_chars(string)
-print("Количество символов '+' в строке:", count_plus)
-print("Количество символов '-' в строке:", count_minus)
-
-def first_and_last_three_chars(s):
-    if len(s) > 5:
-        first_three = s[:3]
-        last_three = s[-3:]
-        return first_three, last_three
-    else:
-        return "Длина строки меньше или равна 5 символам."
+print(f"Количество символов '+' в строке: {count_plus}")
+print(f"Количество символов '-' в строке: {count_minus}")
+print(f"Общее количество знаков '+' и '-' в строке: {total_count}")
 
 # 9) # Дана строка. Вывести первые три символа и последние три символа, если длина строки больше 5.
 # Иначе вывести первый символ столько раз, какова длина строки.
-def process_string(s):
-    if len(s) > 5:
-        return s[:3] + s[-3:]
-    else:
-        return s[0] * len(s)
 
-input_string = "Determinant"
-output = process_string(input_string)
+input_string = "abcdefg"
 
-print(output)
+if len(input_string) > 5:
+    first_three = input_string[:3]
+    last_three = input_string[-3:]
+    print(f"Первые три символа: {first_three}")
+    print(f"Последние три символа: {last_three}")
+else:
+    first_character = input_string[0]
+    repeated_character = first_character * len(input_string)
+    print(f"Первый символ '{first_character}' повторен {len(input_string)} раз: {repeated_character}")
+
 
 # 10) # Дана строка. Определите, какой символ в ней встречается раньше: 'x' или 'w'.
 # Если какого-то из символов нет, вывести сообщение об этом.
 
-def find_earlier_char(s):
-    if 'x' not in s and 'w' not in s:
-        return "В строке нет символов 'x' и 'w'."
-    elif 'x' not in s:
-        return "'w' встречается раньше символа 'x'."
-    elif 'w' not in s:
-        return "'x' встречается раньше символа 'w'."
+input_string = "abcdefghwijklmnopqxrsuvwxyz"
+
+if 'x' not in input_string or 'w' not in input_string:
+    if 'x' not in input_string and 'w' not in input_string:
+        print("Символы 'x' и 'w' отсутствуют в строке.")
+    elif 'x' not in input_string:
+        print("Символ 'x' отсутствует в строке.")
     else:
-        index_x = s.index('x')
-        index_w = s.index('w')
-        if index_x < index_w:
-            return "'x' встречается раньше символа 'w'."
-        else:
-            return "'w' встречается раньше символа 'x'."
+        print("Символ 'w' отсутствует в строке.")
+else:
+    if input_string.index('x') < input_string.index('w'):
+        print("'x' встречается раньше чем 'w' в строке.")
+    else:
+        print("'w' встречается раньше чем 'x' в строке.")
 
-input_string = "ahdwxcy"
-output = find_earlier_char(input_string)
-
-print(output)
 
 # 11) # Даны две строки. Вывести большую по длине строку столько раз, на сколько символов отличаются строки.
 
-def print_string_difference(str1, str2):
-    if len(str1) > len(str2):
-        print(str1 * (len(str1) - len(str2)))
-    elif len(str2) > len(str1):
-        print(str2 * (len(str2) - len(str1)))
+string1 = "Python"
+string2 = "JavaScript"
 
-string1 = "Example"
-string2 = "Example1"
-print_string_difference(string1, string2)
+diff = abs(len(string1) - len(string2))
+
+if len(string1) > len(string2):
+    print(string1 * diff)
+elif len(string1) < len(string2):
+    print(string2 * diff)
+else:
+    print("Строки одинаковой длины.")
+
