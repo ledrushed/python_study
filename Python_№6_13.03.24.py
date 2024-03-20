@@ -1,15 +1,14 @@
 # 1) Дан текст. Найти сумму имеющихся в нем цифр.
 
-def sum_digits_in_text(text):
-    total_sum = 0
-    for char in text:
-        if char.isdigit():
-            total_sum += int(char)
-    return total_sum
+text = "Sample text with numbers 12345"
 
-text = "Дан текст с цифрами 123 и 456."
-total_sum = sum_digits_in_text(text)
-print(f"Сумма цифр в тексте: {total_sum}")
+sum_digits = 0
+for char in text:
+    if char.isdigit():
+        digit = int(char)
+        sum_digits += digit
+
+print("Sum of digits in the text:", sum_digits)
 
 
 # 2) Дана строка. Заменить все символы 'a' и 'b' на 'A' и 'B' соответственно.
